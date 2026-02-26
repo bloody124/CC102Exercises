@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+    char again;
+
+    do {
+        int students, days;
+
+        cout << "Enter number of students: ";
+        cin >> students;
+
+        cout << "Enter number of school days: ";
+        cin >> days;
+
+        vector<vector<int>> attendance(students, vector<int>(days));
+
+        for (int i = 0; i < students; i++) {
+            cout << "\nStudent " << i + 1 << " attendance:\n";
+            for (int j = 0; j < days; j++) {
+                cout << "Day " << j + 1 << " (1=Present, 0=Absent): ";
+                cin >> attendance[i][j];
+            }
+        }
+
+        cout << "\n\nStudent\t";
+        for (int d = 0; d < days; d++) {
+            cout << "D" << d + 1 << "\t";
+        }
+        cout << "Total\tPercentage\tRemarks\n";
+
+        for (int i = 0; i < students; i++) {
+            int total = 0;
+
+            for (int j = 0; j < days; j++) {
+                total += attendance[i][j];
+            }
+
+            double percentage = (double)total / days * 100;
+            string remarks = (percentage < 50) ? "DRP" : "OK";
+
+            cout << i + 1 << "\t";
+
+            for (int j = 0; j < days; j++) {
+                cout << attendance[i][j] << "\t";
+            }
+
+            cout << total << "\t";
+            cout << fixed << setprecision(0) << percentage << "%\t\t";
+            cout << remarks << endl;
+        }
+
+        cout << "\nDo you want to run the program again? (y/n): ";
+        cin >> again;
+
+        cout << "\n";
+
+    } while (again == 'y' || again == 'Y');
+
+    cout << "Program terminated.\n";
+
+    return 0;
+}
