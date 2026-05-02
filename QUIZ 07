@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+bool isPerfectSquare(int n) {
+    int root = sqrt(n);
+    return root * root == n;
+}
+
+int main() {
+    ifstream inFile("input.txt");
+    ofstream outFile("output.txt");
+
+    int num;
+    while (inFile >> num) {
+        if (num % 2 == 0 && isPerfectSquare(num)) {
+            outFile << num << endl;
+        }
+    }
+
+    return 0;
+}
